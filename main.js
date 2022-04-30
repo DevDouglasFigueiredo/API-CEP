@@ -54,6 +54,6 @@ const enviarFormulario = document.querySelector('[data-botao]');
 
 enviarFormulario.addEventListener('click', (evento)=>{
     evento.preventDefault()
-    limparFormulario();
-    alert('O Seu cadastro foi realizado');
+    
+    alert('O Seu cadastro foi realizado, obrigado');
 })
