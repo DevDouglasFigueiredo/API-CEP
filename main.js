@@ -1,11 +1,11 @@
-const rua =  document.querySelector('#endereco');
+const rua = document.querySelector('#endereco');
 const bairro = document.querySelector('#bairro');
 const cidade = document.querySelector('#cidade');
 const estado = document.querySelector('#estado');
 
 
-function preencherFormulario (endereco) {
-    
+function preencherFormulario(endereco) {
+
     rua.value = endereco.logradouro;
     bairro.value = endereco.bairro;
     cidade.value = endereco.localidade;
@@ -13,9 +13,9 @@ function preencherFormulario (endereco) {
 
 }
 
-function limparFormulario (endereco) {
+function limparFormulario(endereco) {
     rua.value = "";
-    bairro.value ="";
+    bairro.value = "";
     cidade.value = "";
     estado.value = "";
 
@@ -23,27 +23,27 @@ function limparFormulario (endereco) {
 
 
 const eNumero = (numero) => /^[0-9]+$/.test(numero);
-const cepValido = (cep) => cep.length == 8 &&  eNumero(cep);
+const cepValido = (cep) => cep.length == 8 && eNumero(cep);
 
 
-const pesquisarCep = async () =>{
+const pesquisarCep = async () => {
     limparFormulario();
     const cep = document.querySelector('#cep').value;
     const url = `http://viacep.com.br/ws/${cep}/json/`;
 
-    if(cepValido(cep)){
+    if (cepValido(cep)) {
         const dados = await fetch(url);
         const endereco = await dados.json();
-        if(endereco.hasOwnProperty('erro')){
-            rua.value ='CEP`não encontrado';
-            
-    
-        } else{
+        if (endereco.hasOwnProperty('erro')) {
+            rua.value = 'CEP`não encontrado';
+
+
+        } else {
             preencherFormulario(endereco);
         }
-        
+
     } else {
-        rua.value ='CEP incorrreto';
+        rua.value = 'CEP incorrreto';
     }
 
 }
@@ -52,8 +52,24 @@ document.querySelector('[data-cep]').addEventListener('focusout', pesquisarCep);
 
 const enviarFormulario = document.querySelector('[data-botao]');
 
-enviarFormulario.addEventListener('click', (evento)=>{
-    evento.preventDefault()
-    
-    alert('O Seu cadastro foi realizado, obrigado');
+enviarFormulario.addEventListener('click', (evento) => {
+    const inputs = document.querySelectorAll('input');
+    let valid = true;
+    inputs.forEach(input => {
+        if (input.value == "") {
+            valid = false;
+        }
+
+    }
+    )
+
+    if (valid) {
+        evento.preventDefault()
+
+        alert('O Seu cadastro foi realizado, obrigado');
+
+    } else {
+        alert('Precisa preencher todos os campos !!')
+    }
+
 })
