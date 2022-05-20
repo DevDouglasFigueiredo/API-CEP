@@ -4,6 +4,7 @@ const cidade = document.querySelector('#cidade');
 const estado = document.querySelector('#estado');
 
 
+
 function preencherFormulario(endereco) {
 
     rua.value = endereco.logradouro;
@@ -35,15 +36,19 @@ const pesquisarCep = async () => {
         const dados = await fetch(url);
         const endereco = await dados.json();
         if (endereco.hasOwnProperty('erro')) {
-            rua.value = 'CEP`não encontrado';
-
-
+            rua.value = 'CEP não encontrado';
+            rua.classList.add('cep-incorreto');
+            
+            
         } else {
             preencherFormulario(endereco);
-        }
+            rua.classList.remove('cep-incorreto')
 
+        }
+        
     } else {
         rua.value = 'CEP incorrreto';
+        
     }
 
 }
@@ -59,17 +64,17 @@ enviarFormulario.addEventListener('click', (evento) => {
         if (input.value == "") {
             valid = false;
         }
-
+            
     }
     )
-
     if (valid) {
         evento.preventDefault()
+        location.reload();
 
         alert('O Seu cadastro foi realizado, obrigado');
 
     } else {
         alert('Precisa preencher todos os campos !!')
+        location.reload();
     }
-
 })

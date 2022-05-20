@@ -76,6 +76,10 @@ span{
     right: 500px;
 }
 
+.cep-incorreto{
+    
+    border: 2px solid #df0000;
+}
 
 .input-invalidado{
     border: 2px solid #a80202;
@@ -83,5 +87,8 @@ span{
 
 
 .input-validado{
-    border: 2px solid #02df57;
+    border: 2px solid #023f1a;
+    background-color: #02df57;
+    color: #FFF;
+
 }
